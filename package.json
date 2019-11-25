@@ -1,0 +1,41 @@
+{
+  "name": "examiner",
+  "version": "1.0.0",
+  "description": "Test generator for javaScript",
+  "main": "index.js",
+  "scripts": {
+    "compile": "tsc -p --resolveJsonModule ./tsconfig.json",
+    "test": "mocha tests/**/*.spec.js",
+    "lint": "tslint -c tslint.json 'src/**/*.ts' 'tests/**/*.spec.ts'",
+    "doc": "typedoc --out docs/src/ --readme ./README.md",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beatlejute/examiner.git"
+  },
+  "keywords": [
+    "test",
+    "generator"
+  ],
+  "author": "beatlejute",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/beatlejute/examiner/issues"
+  },
+  "homepage": "https://github.com/beatlejute/examiner#readme",
+  "devDependencies": {
+    "conventional-changelog-cli": "^2.0.28",
+    "tslint": "^5.20.1",
+    "typedoc": "^0.15.2",
+    "typescript": "^3.7.2",
+    "mocha": "^6.2.0",
+    "chai": "^4.2.0",
+    "@types/chai": "^4.2.2",
+    "@types/mocha": "^5.2.7"
+  },
+  "dependencies": {
+    "@types/node": "^12.12.11",
+    "config": "^3.2.4"
+  }
+}
