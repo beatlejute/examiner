@@ -9,14 +9,11 @@ process.on("message", (testCase) => {
 
     const mockFilename = conf.get("mainCat")
         + conf.get("mocksCat")
-        //+ "mock"
         + testCase.fileName
-        + "/"
-        + testCase.funcName
+        + "/" + testCase.funcName
         + conf.get("mockFilePostfix");
     const testFilename = conf.get("mainCat")
         + conf.get("testsCat")
-        //+ "test"
         + testCase.fileName
         + "/" + testCase.funcName
         + conf.get("testFilePostfix");
@@ -30,15 +27,15 @@ process.on("message", (testCase) => {
         describe = mock[key].describe;
         it = mock[key].it;
     }
-    const describes = Object.values(mock)
+    const describes = [...new Set(Object.values(mock)
         .filter((p: any) => p.describe && p.describe !== describe)
-        .map((p: any) => p.describe);
+        .map((p: any) => p.describe))];
     if (describe) {
         describes.unshift(describe);
     }
-    const its = Object.values(mock)
+    const its = [...new Set(Object.values(mock)
         .filter((p: any) => p.it && p.it !== it)
-        .map((p: any) => p.it);
+        .map((p: any) => p.it))];
     if (it) {
         its.unshift(it);
     }
@@ -59,7 +56,7 @@ process.on("message", (testCase) => {
 
     const stdin = process.openStdin();
     stdin.on("data", (chunk) => {
-        const answer = chunk.toString().trim();
+        const answer = chunk.toString().trim() || 0;
 
         switch (step) {
             case 0:
@@ -126,10 +123,8 @@ function _generator(mock: any, conf: any) {
     const backToRootPath = conf.get("mocksCat").split("/").fill("..").join("/") + "/..";
     const mockFile = backToRootPath
         + conf.get("mocksCat")
-        //+ "mock"
         + mock.fileName
-        + "/"
-        + mock.funcName
+        + "/" + mock.funcName
         + conf.get("mockFilePostfix");
 
     let code = `
