@@ -1,9 +1,10 @@
 // @ts-ignore
 const fork = require('child_process').fork;
-const conf = require("./examconfig.json");
+const config = require('config-js');
+const conf = new config('examconfig.js');
 
 export function exam(func: any, context: any) {
-    const inquirer = fork('./inquirer.js');
+    const inquirer = fork(__dirname + '/inquirer.js');
     const module = context.exports[func.name] === func
         ? context
         : context.children.find((m: any) => m.exports[func.name] === func);
@@ -16,7 +17,7 @@ export function exam(func: any, context: any) {
                 output: ret,
             },
             funcName: func.name,
-            fileName: module.filename.split(conf.mainCat)[1],
+            fileName: module.filename.split(conf.get("mainCat"))[1],
         });
 
         return ret;

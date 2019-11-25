@@ -1,24 +1,25 @@
 const fs = require("fs");
 const path = require("path");
-const conf = require("./examconfig.json");
+const config = require('config-js');
+const conf = new config('examconfig.js');
 
 process.on("message", (testCase) => {
 
     const key: string = JSON.stringify(Object.values(testCase as object)[0].input);
 
-    const mockFilename = conf.mainCat
-        + conf.mocksCat
-        + "mock"
+    const mockFilename = conf.get("mainCat")
+        + conf.get("mocksCat")
+        //+ "mock"
         + testCase.fileName
         + "/"
         + testCase.funcName
-        + conf.mockFilePostfix;
-    const testFilename = conf.mainCat
-        + conf.testsCat
-        + "test"
+        + conf.get("mockFilePostfix");
+    const testFilename = conf.get("mainCat")
+        + conf.get("testsCat")
+        //+ "test"
         + testCase.fileName
         + "/" + testCase.funcName
-        + conf.testFilePostfix;
+        + conf.get("testFilePostfix");
     const mock = fs.existsSync(mockFilename) ? require(mockFilename) : {};
 
     let describe: any = null;
@@ -47,7 +48,7 @@ process.on("message", (testCase) => {
         console.log("\x1b[32m", "Select number of test describe or enter new:");
         for (const index in describes) {
             // tslint:disable-next-line:no-console
-            console.log("\x1b[32m", index, describes[index]);
+            console.log("\x1b[32m", index + ":", describes[index]);
         }
     } else {
         // tslint:disable-next-line:no-console
@@ -68,7 +69,7 @@ process.on("message", (testCase) => {
                     console.log("\x1b[32m", "Select number of test it or enter new:");
                     for (const index in its) {
                         // tslint:disable-next-line:no-console
-                        console.log("\x1b[32m", index, its[index]);
+                        console.log("\x1b[32m", index + ":", its[index]);
                     }
                 } else {
                     // tslint:disable-next-line:no-console
@@ -122,21 +123,20 @@ function _getDescribes(mock: any) {
 function _generator(mock: any, conf: any) {
     const describes: any = _getDescribes(mock);
     const mockArr = Object.values(mock);
-    const backToRootPath = conf.mocksCat.split("/").fill("..").join("/");
+    const backToRootPath = conf.get("mocksCat").split("/").fill("..").join("/") + "/..";
     const mockFile = backToRootPath
-        + conf.mocksCat
-        + "mock"
+        + conf.get("mocksCat")
+        //+ "mock"
         + mock.fileName
         + "/"
         + mock.funcName
-        + conf.mockFilePostfix;
+        + conf.get("mockFilePostfix");
 
     let code = `
 import {assert, expect} from "chai";
 import {${mock.funcName}} from "${backToRootPath}${mock.fileName}";
-import mock from "${mockFile}";
+var mockArr = Object.values(require("${mockFile}"));
 
-const mockArr = Object.values(mock);
 `;
 
     for (const describe in describes) {
