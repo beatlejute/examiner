@@ -1,7 +1,8 @@
-const fs = require("fs");
-const path = require("path");
-const config = require('config-js');
-const conf = new config('examconfig.js');
+// @ts-ignore
+import config from "config-js";
+import fs from "fs";
+import path from "path";
+const conf = new config("examconfig.js");
 
 let testCase: any;
 let key: string;
@@ -51,6 +52,7 @@ export const inquirer = (tcase: any): void => {
     if (describes.length) {
         // tslint:disable-next-line:no-console
         console.log("\x1b[32m", "Select number of test describe or enter new:");
+        // tslint:disable-next-line:forin
         for (const index in describes) {
             // tslint:disable-next-line:no-console
             console.log("\x1b[32m", index + ":", describes[index]);
@@ -71,6 +73,7 @@ export const inquirer = (tcase: any): void => {
                 if (its.length) {
                     // tslint:disable-next-line:no-console
                     console.log("\x1b[32m", "Select number of test it or enter new:");
+                    // tslint:disable-next-line:forin
                     for (const index in its) {
                         // tslint:disable-next-line:no-console
                         console.log("\x1b[32m", index + ":", its[index]);
@@ -107,8 +110,11 @@ export const inquirer = (tcase: any): void => {
     });
 };
 
+// tslint:disable-next-line:no-shadowed-variable
 function _getDescribes(mock: any) {
+    // tslint:disable-next-line:no-shadowed-variable
     const describes: any = {};
+    // tslint:disable-next-line:no-shadowed-variable
     for (const key in mock) {
         if (mock[key].describe) {
             if (!describes[mock[key].describe]) {
@@ -123,7 +129,9 @@ function _getDescribes(mock: any) {
     return describes;
 }
 
+// tslint:disable-next-line:no-shadowed-variable
 function _generator(mock: any, conf: any) {
+    // tslint:disable-next-line:no-shadowed-variable
     const describes: any = _getDescribes(mock);
     const mockArr = Object.values(mock);
     const backToRootPath = conf.get("mocksCat").split("/").fill("..").join("/") + "/..";
@@ -140,14 +148,17 @@ var mockArr = Object.values(require("${mockFile}"));
 
 `;
 
+    // tslint:disable-next-line:forin no-shadowed-variable
     for (const describe in describes) {
         code += `
 describe("${describe}", () => {`;
 
+        // tslint:disable-next-line:forin no-shadowed-variable
         for (const it in describes[describe]) {
             code += `
     it("${it}", () => {`;
 
+            // tslint:disable-next-line:forin no-shadowed-variable
             for (const test in describes[describe][it]) {
                 const index = mockArr.findIndex((t: any) => t.input === mock[test].input);
 

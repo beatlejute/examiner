@@ -1,5 +1,5 @@
 {
-  "name": "examiner",
+  "name": "test-examiner",
   "version": "1.0.0",
   "description": "Test generator for javaScript",
   "main": "./src/index.js",
@@ -12,7 +12,7 @@
   },
   "bin": {
     "exam": "./bin/global.js",
-    "exam init": "./bin/init.js"
+    "examInit": "./bin/init.js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,7 @@
     "generator"
   ],
   "author": "beatlejute",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/beatlejute/examiner/issues"
   },
@@ -37,10 +37,10 @@
     "chai": "^4.2.0",
     "@types/chai": "^4.2.2",
     "@types/mocha": "^5.2.7",
-    "@types/node": "^12.12.11"
+    "@types/node": "^12.12.11",
+    "@types/minimist": "^1.2.0"
   },
   "dependencies": {
-    "@types/minimist": "^1.2.0",
     "config-js": "^1.1.13",
     "minimist": "^1.2.0",
     "amd-loader": "git+https://github.com:beatlejute/node-amd-loader.git"

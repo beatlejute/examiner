@@ -1,5 +1,6 @@
+// @ts-ignore
 import config from "config-js";
-const conf = new config("examconfig.js");
+const conf: any = new config("examconfig.js");
 import {inquirer} from "../src/inquirer.js";
 
 export function exam(func: any, context: any) {
@@ -14,8 +15,8 @@ export function exam(func: any, context: any) {
                 input: arguments,
                 output: ret,
             },
-            funcName: func.name,
             fileName: module.filename.split(conf.get("mainCat"))[1],
+            funcName: func.name,
         });
 
         return ret;
