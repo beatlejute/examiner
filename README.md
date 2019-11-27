@@ -1,6 +1,9 @@
+
+
 #examiner
 
 Test generator for javaScript.
+
 
 # usage
 
@@ -16,6 +19,7 @@ Argument options:
 * `--function` or `--f` - name of function for test generated.
 * `--arguments` or `--a` - stringify input arguments object for test generated.
 * `--amd-loader` - if you use AMD modules.
+
 
 #example
 
@@ -42,6 +46,7 @@ You can generate command in browser debuger (stop in function), for example:
 ```
 copy("NODE_PATH=./ exam --amd-loader --m=" + new Error().stack.split("\n")[1].split(location.host)[1].split(".js?")[0] + " --f=" + new Error().stack.split("\n")[1].split("(")[1].split(" ")[2] + " --a='" + JSON.stringify(arguments) + "'")
 ```
+
 
 #methods
 
