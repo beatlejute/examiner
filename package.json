@@ -11,7 +11,8 @@
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "bin": {
-    "ex": "./bin/global.js"
+    "exam": "./bin/global.js",
+    "exam init": "./bin/init.js"
   },
   "repository": {
     "type": "git",
@@ -39,6 +40,9 @@
     "@types/node": "^12.12.11"
   },
   "dependencies": {
-    "config-js": "^1.1.13"
+    "@types/minimist": "^1.2.0",
+    "config-js": "^1.1.13",
+    "minimist": "^1.2.0",
+    "amd-loader": "git+https://github.com:beatlejute/node-amd-loader.git"
   }
 }

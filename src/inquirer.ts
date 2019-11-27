@@ -3,37 +3,45 @@ const path = require("path");
 const config = require('config-js');
 const conf = new config('examconfig.js');
 
-process.on("message", (testCase) => {
+let testCase: any;
+let key: string;
+let mockFilename: string;
+let testFilename: string;
+let mock: any;
+let describe: any = null;
+let it: any;
+let its: any;
+let describes: any;
 
-    const key: string = JSON.stringify(Object.values(testCase as object)[0].input);
+export const inquirer = (tcase: any): void => {
+    testCase = tcase;
+    key = JSON.stringify(Object.values(testCase as object)[0].input);
 
-    const mockFilename = conf.get("mainCat")
+    mockFilename = conf.get("mainCat")
         + conf.get("mocksCat")
         + testCase.fileName
         + "/" + testCase.funcName
         + conf.get("mockFilePostfix");
-    const testFilename = conf.get("mainCat")
+    testFilename = conf.get("mainCat")
         + conf.get("testsCat")
         + testCase.fileName
         + "/" + testCase.funcName
         + conf.get("testFilePostfix");
-    const mock = fs.existsSync(mockFilename) ? require(mockFilename) : {};
+    mock = fs.existsSync(mockFilename) ? require(mockFilename) : {};
 
-    let describe: any = null;
-    let it: any = null;
     if (mock[key]) {
         // tslint:disable-next-line:no-console
         console.log("\x1b[32m", "This test already exist.");
         describe = mock[key].describe;
         it = mock[key].it;
     }
-    const describes = [...new Set(Object.values(mock)
+    describes = [...new Set(Object.values(mock)
         .filter((p: any) => p.describe && p.describe !== describe)
         .map((p: any) => p.describe))];
     if (describe) {
         describes.unshift(describe);
     }
-    const its = [...new Set(Object.values(mock)
+    its = [...new Set(Object.values(mock)
         .filter((p: any) => p.it && p.it !== it)
         .map((p: any) => p.it))];
     if (it) {
@@ -53,9 +61,8 @@ process.on("message", (testCase) => {
     }
 
     let step: number = 0;
-
     const stdin = process.openStdin();
-    stdin.on("data", (chunk) => {
+    stdin.on("data", (chunk: any) => {
         const answer = chunk.toString().trim() || 0;
 
         switch (step) {
@@ -84,9 +91,9 @@ process.on("message", (testCase) => {
                 console.log("Test generate complete.");
 
                 const newMock = Object.assign(mock, testCase);
-                fs.mkdirSync(path.dirname(mockFilename), { recursive: true });
+                fs.mkdirSync(path.dirname(mockFilename), {recursive: true});
                 fs.writeFileSync(mockFilename, JSON.stringify(newMock), "utf8");
-                fs.mkdirSync(path.dirname(testFilename), { recursive: true });
+                fs.mkdirSync(path.dirname(testFilename), {recursive: true});
                 fs.writeFileSync(testFilename, _generator(newMock, conf), "utf8");
                 process.exit();
                 break;
@@ -98,8 +105,7 @@ process.on("message", (testCase) => {
 
         step++;
     });
-
-});
+};
 
 function _getDescribes(mock: any) {
     const describes: any = {};
