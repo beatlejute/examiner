@@ -15,7 +15,7 @@ export function exam(func: any, context: any) {
                 input: arguments,
                 output: ret,
             },
-            fileName: module.filename.split(conf.get("mainCat"))[1],
+            fileName: module.filename.split(conf.get("mainCat"))[1] ?? module.filename,
             funcName: func.name,
         });
 
