@@ -10,12 +10,14 @@ export function exam(func: any, context: any) {
     return function mutant(this: any) {
         const ret = func.apply(this, arguments);
 
+        const filename = module.filename.split(conf.get("mainCat"))[1] ?? module.filename;
+
         inquirer({
             [JSON.stringify(arguments)]: {
                 input: arguments,
                 output: ret,
             },
-            fileName: module.filename.split(conf.get("mainCat"))[1] ?? module.filename,
+            fileName: filename.replace(/^\/+|\/+$/g, ""),
             funcName: func.name,
         });
 
