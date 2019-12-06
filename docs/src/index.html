@@ -1,0 +1,213 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>test-examiner</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">test-examiner</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> test-examiner</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<p>#examiner</p>
+				<p>Test generator for javaScript.</p>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h1>usage</h1>
+				</a>
+				<p>For CLI using you can run in project root:</p>
+				<pre><code><span class="hljs-attr">NODE_PATH</span>=./ exam</code></pre><p>Argument options:</p>
+				<ul>
+					<li><code>--module</code> or <code>--m</code> - name of module for test generated.</li>
+					<li><code>--function</code> or <code>--f</code> - name of function for test generated.</li>
+					<li><code>--arguments</code> or <code>--a</code> - stringify input arguments object for test generated.</li>
+					<li><code>--amd-loader</code> - if you use AMD modules.</li>
+				</ul>
+				<p>#example</p>
+				<pre><code>NODE_PATH=./ exam --amd-loader --m=P2P/candidates-finder --f=getSpeed --a='{<span class="hljs-string">"0"</span>:{<span class="hljs-string">"id"</span>:<span class="hljs-string">"defc80d7-2645-4e85-88d9-02b6d7ae7858"</span>,<span class="hljs-string">"type"</span>:<span class="hljs-string">"peer"</span>,<span class="hljs-string">"connectionType"</span>:<span class="hljs-string">"webrtc"</span>,<span class="hljs-string">"netInfo"</span>:[{<span class="hljs-string">"ip"</span>:<span class="hljs-string">"37.79.221.42"</span>,<span class="hljs-string">"isGrey"</span>:<span class="hljs-keyword">false</span>,<span class="hljs-string">"kind"</span>:<span class="hljs-string">"srflx"</span>},{<span class="hljs-string">"ip"</span>:<span class="hljs-string">"10.66.14.50"</span>,<span class="hljs-string">"isGrey"</span>:<span class="hljs-keyword">true</span>,<span class="hljs-string">"kind"</span>:<span class="hljs-string">"host"</span>},{<span class="hljs-string">"ip"</span>:<span class="hljs-string">"172.18.0.1"</span>,<span class="hljs-string">"isGrey"</span>:<span class="hljs-keyword">true</span>,<span class="hljs-string">"kind"</span>:<span class="hljs-string">"host"</span>},{<span class="hljs-string">"ip"</span>:<span class="hljs-string">"172.19.0.1"</span>,<span class="hljs-string">"isGrey"</span>:<span class="hljs-keyword">true</span>,<span class="hljs-string">"kind"</span>:<span class="hljs-string">"host"</span>}],<span class="hljs-string">"sources"</span>:{<span class="hljs-string">"main"</span>:{<span class="hljs-string">"latency"</span>:<span class="hljs-number">0</span>},<span class="hljs-string">"reserve"</span>:{<span class="hljs-string">"latency"</span>:<span class="hljs-keyword">null</span>}},<span class="hljs-string">"fallbackState"</span>:<span class="hljs-keyword">false</span>,<span class="hljs-string">"relayCfg"</span>:{<span class="hljs-string">"connectionsLimit"</span>:{<span class="hljs-string">"wrtc"</span>:<span class="hljs-number">3</span>,<span class="hljs-string">"ws"</span>:<span class="hljs-number">20</span>},<span class="hljs-string">"sendMissedChunks"</span>:<span class="hljs-keyword">true</span>},<span class="hljs-string">"depth"</span>:<span class="hljs-number">0</span>}}'</code></pre><p>Generated new test in /tests/generated/P2P/candidates-finder.js/getSpeed.spec.ts like:</p>
+				<pre><code><span class="hljs-keyword">import</span> {<span class="hljs-built_in">assert</span>, expect} <span class="hljs-keyword">from</span> <span class="hljs-string">"chai"</span>;
+<span class="hljs-keyword">import</span> {getSpeed} <span class="hljs-keyword">from</span> <span class="hljs-string">"../../../../P2P/candidates-finder.js"</span>;
+var mockArr = Object.values(<span class="hljs-built_in">require</span>(<span class="hljs-string">"../../../../test/generated/mocks/P2P/candidates-finder.js/getSpeed.json"</span>));
+
+
+describe(<span class="hljs-string">"test describe"</span>, <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    it(<span class="hljs-string">"test it"</span>, <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        <span class="hljs-built_in">assert</span>.equal(getSpeed.apply(this, Object.values(mockArr[<span class="hljs-number">0</span>].input)) ,mockArr[<span class="hljs-number">0</span>].output, <span class="hljs-string">"test message"</span>);
+    });
+});</code></pre><p>You can generate command in browser debuger (stop in function), for example:</p>
+				<pre><code>copy(<span class="hljs-string">"NODE_PATH=./ exam --amd-loader --m="</span> + new Error().stack.split(<span class="hljs-string">"\n"</span>)[<span class="hljs-number">1</span>].split(<span class="hljs-name">location</span>.host)[<span class="hljs-number">1</span>].split(<span class="hljs-string">".js?"</span>)[<span class="hljs-number">0</span>] + <span class="hljs-string">" --f="</span> + new Error().stack.split(<span class="hljs-string">"\n"</span>)[<span class="hljs-number">1</span>].split(<span class="hljs-string">"("</span>)[<span class="hljs-number">1</span>].split(<span class="hljs-string">" "</span>)[<span class="hljs-number">2</span>] + <span class="hljs-string">" --a='"</span> + JSON.stringify(<span class="hljs-name">arguments</span>) + <span class="hljs-string">"'"</span>)</code></pre><p>#methods</p>
+				<pre><code><span class="hljs-keyword">var</span> candidates_finder = <span class="hljs-built_in">require</span>(<span class="hljs-string">"P2P/candidates-finder"</span>);
+<span class="hljs-keyword">var</span> examiner = <span class="hljs-built_in">require</span>(<span class="hljs-string">"test-examiner"</span>);
+
+<span class="hljs-comment">//Decorator</span>
+<span class="hljs-keyword">var</span> getSpeed = examiner.exam(candidates_finder.getSpeed, <span class="hljs-built_in">module</span>);
+
+<span class="hljs-comment">//Run for create test</span>
+getSpeed({<span class="hljs-string">"id"</span>: <span class="hljs-string">"f79d47e3-08d9-4a84-9f85-09e8b22fe1b5"</span>,<span class="hljs-string">"type"</span>: <span class="hljs-string">"peer"</span>,<span class="hljs-string">"connectionType"</span>: <span class="hljs-string">"webrtc"</span>,<span class="hljs-string">"netInfo"</span>: [{<span class="hljs-string">"ip"</span>: <span class="hljs-string">"37.79.221.42"</span>,<span class="hljs-string">"isGrey"</span>: <span class="hljs-literal">false</span>,<span class="hljs-string">"kind"</span>: <span class="hljs-string">"srflx"</span>}],<span class="hljs-string">"sources"</span>: {<span class="hljs-string">"main"</span>: {},<span class="hljs-string">"reserve"</span>: {}},<span class="hljs-string">"fallbackState"</span>: <span class="hljs-literal">true</span>,<span class="hljs-string">"relayCfg"</span>: {<span class="hljs-string">"connectionsLimit"</span>: {<span class="hljs-string">"wrtc"</span>: <span class="hljs-number">3</span>,<span class="hljs-string">"ws"</span>: <span class="hljs-number">20</span>},<span class="hljs-string">"sendMissedChunks"</span>: <span class="hljs-literal">true</span>},<span class="hljs-string">"depth"</span>: <span class="hljs-number">0</span>});</code></pre>
+				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+					<h1>install</h1>
+				</a>
+				<p>With <a href="https://npmjs.org">npm</a> do:</p>
+				<pre><code>npm <span class="hljs-keyword">install</span> -g <span class="hljs-keyword">test</span>-examiner</code></pre><p>For init examiner, go to your project root and do:</p>
+				<pre><code><span class="hljs-attribute">examInit</span></code></pre>
+				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+					<h1>license</h1>
+				</a>
+				<p>MIT</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bin_global_.html">&quot;bin/global&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bin_init_.html">&quot;bin/init&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_example_.html">&quot;src/example&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_index_.html">&quot;src/index&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_inquirer_.html">&quot;src/inquirer&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_test_.html">&quot;src/test&quot;</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

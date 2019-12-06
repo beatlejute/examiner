@@ -32,7 +32,8 @@ Generated new test in /tests/generated/P2P/candidates-finder.js/getSpeed.spec.ts
 ```
 import {assert, expect} from "chai";
 import {getSpeed} from "../../../../P2P/candidates-finder.js";
-var mockArr = Object.values(require("../../../../test/generated/mocks/P2P/candidates-finder.js/getSpeed.json"));
+import {mock} from "../../../../../test/generated/mocks/P2P/candidates-finder.js/getSpeed";
+const mockArr: any = Object.values(mock).filter((e) => typeof e === "object");
 
 
 describe("test describe", () => {

@@ -28,7 +28,9 @@ export const inquirer = (tcase: any): void => {
         + testCase.fileName
         + "/" + testCase.funcName
         + conf.get("testFilePostfix");
-    mock = fs.existsSync(mockFilename) ? require(mockFilename) : {};
+    mock = fs.existsSync(mockFilename)
+        ? JSON.parse(fs.readFileSync(mockFilename, "utf8").replace("export const mock = ", ""))
+        : {};
 
     if (mock[key]) {
         // tslint:disable-next-line:no-console
@@ -95,7 +97,7 @@ export const inquirer = (tcase: any): void => {
 
                 const newMock = Object.assign(mock, testCase);
                 fs.mkdirSync(path.dirname(mockFilename), {recursive: true});
-                fs.writeFileSync(mockFilename, JSON.stringify(newMock), "utf8");
+                fs.writeFileSync(mockFilename, "export const mock = " + JSON.stringify(newMock), "utf8");
                 fs.mkdirSync(path.dirname(testFilename), {recursive: true});
                 fs.writeFileSync(testFilename, _generator(newMock, conf), "utf8");
                 process.exit();
@@ -134,7 +136,7 @@ function _generator(mock: any, conf: any) {
     // tslint:disable-next-line:no-shadowed-variable
     const describes: any = _getDescribes(mock);
     const mockArr = Object.values(mock);
-    const backToRootPath = conf.get("mocksCat").split("/").fill("..").join("/") + "/..";
+    const backToRootPath = conf.get("mocksCat").split("/").fill("..").join("/");
     const mockFile = backToRootPath
         + conf.get("mocksCat")
         + mock.fileName
@@ -143,8 +145,9 @@ function _generator(mock: any, conf: any) {
 
     let code = `
 import {assert, expect} from "chai";
-import {${mock.funcName}} from "${backToRootPath}${mock.fileName}";
-var mockArr = Object.values(require("${mockFile}"));
+import {${mock.funcName}} from "${backToRootPath + "/"}${mock.fileName.replace(/.js+$/g, "")}";
+import {mock} from "${mockFile.replace(/.ts+$/g, "")}";
+const mockArr: any = Object.values(mock).filter((e) => typeof e === "object");
 
 `;
 
