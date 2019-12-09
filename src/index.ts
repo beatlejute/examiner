@@ -3,6 +3,13 @@ import config from "config-js";
 const conf: any = new config("examconfig.js");
 import {inquirer} from "../src/inquirer.js";
 
+/**
+ * Mutator for listen function inputs and outputs.
+ * Create unit tests.
+ * @param func Function for which you need to create tests.
+ * @param context Scope for function
+ * @returns mutant Function with listener for create test
+ */
 export function exam(func: any, context: any) {
     const module = context.exports[func.name] === func
         ? context

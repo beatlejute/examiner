@@ -5,7 +5,7 @@
   "main": "./src/index.js",
   "scripts": {
     "compile": "tsc -p --resolveJsonModule ./tsconfig.json",
-    "test": "mocha tests/**/*.spec.js",
+    "test": "NODE_PATH=./ TS_NODE_FILES=true TS_NODE_PROJECT=./test/tsconfig.json mocha --exit --require ts-node/register --require amd-loader --colors ./test/**/*.spec.ts",
     "lint": "tslint -c tslint.json 'src/**/*.ts' 'tests/**/*.spec.ts'",
     "doc": "typedoc --out docs/src/ --readme ./README.md",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
@@ -42,8 +42,9 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
+    "amd-loader": "git+https://github.com:beatlejute/node-amd-loader.git",
     "config-js": "^1.1.13",
     "minimist": "^1.2.0",
-    "amd-loader": "git+https://github.com:beatlejute/node-amd-loader.git"
+    "ts-node": "^8.5.4"
   }
 }

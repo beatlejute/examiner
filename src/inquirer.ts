@@ -14,6 +14,10 @@ let it: any;
 let its: any;
 let describes: any;
 
+/**
+ * Mock and test files creater
+ * @param tcase test case for mock file
+ */
 export const inquirer = (tcase: any): void => {
     testCase = tcase;
     key = JSON.stringify(Object.values(testCase as object)[0].input);
@@ -112,6 +116,11 @@ export const inquirer = (tcase: any): void => {
     });
 };
 
+/**
+ * Get all existed describes in test
+ * @param mock Mock object
+ * @returns describes
+ */
 // tslint:disable-next-line:no-shadowed-variable
 export function getDescribes(mock: any) {
     // tslint:disable-next-line:no-shadowed-variable
@@ -131,6 +140,12 @@ export function getDescribes(mock: any) {
     return describes;
 }
 
+/**
+ * Test code generator
+ * @param mock Mock object
+ * @param conf Config
+ * @returns code Test code
+ */
 // tslint:disable-next-line:no-shadowed-variable
 export function generator(mock: any, conf: any) {
     // tslint:disable-next-line:no-shadowed-variable
@@ -147,7 +162,7 @@ export function generator(mock: any, conf: any) {
 import {assert, expect} from "chai";
 import {${mock.funcName}} from "${backToRootPath + "/"}${mock.fileName.replace(/.js+$/g, "")}";
 import {mock} from "${mockFile.replace(/.ts+$/g, "")}";
-const mockArr: any = Object.values(mock).filter((e) => typeof e === "object");
+const mockArr: any = Object.values(mock);
 
 `;
 
@@ -167,25 +182,25 @@ describe("${describe}", () => {`;
 
                 if (mock[test].throw) {
                     code += `
-        expect(() => ${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)), "${mock[test].message}").to.throw();`;
+        expect(() => ${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)), ${JSON.stringify(mock[test].message)}).to.throw();`;
                 } else {
                     switch (typeof mock[test].output) {
                         case "object":
                             code += `
-        assert.equal(JSON.stringify(${mock.funcName}.apply(this, Object.values(mockArr[${index}].input))) ,JSON.stringify(mockArr[${index}].output), "${mock[test].message}");`;
+        assert.equal(JSON.stringify(${mock.funcName}.apply(this, Object.values(mockArr[${index}].input))) ,JSON.stringify(mockArr[${index}].output), ${JSON.stringify(mock[test].message)});`;
                             break;
                         case "boolean":
                             if (mock[test].output) {
                                 code += `
-        assert.isTrue(${mock.funcName}.apply(this, JSON.stringify(Object.values(mockArr[${index}].input)), "${mock[test].message}");`;
+        assert.isTrue(${mock.funcName}.apply(this, JSON.stringify(Object.values(mockArr[${index}].input)), ${JSON.stringify(mock[test].message)});`;
                             } else {
                                 code += `
-        assert.isFalse(${mock.funcName}.apply(this, JSON.stringify(Object.values(mockArr[${index}].input)), "${mock[test].message}");`;
+        assert.isFalse(${mock.funcName}.apply(this, JSON.stringify(Object.values(mockArr[${index}].input)), ${JSON.stringify(mock[test].message)});`;
                             }
                             break;
                         default:
                             code += `
-        assert.equal(${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)) ,mockArr[${index}].output, "${mock[test].message}");`;
+        assert.equal(${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)) ,mockArr[${index}].output, ${JSON.stringify(mock[test].message)});`;
                             break;
                     }
                 }
