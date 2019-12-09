@@ -47,6 +47,10 @@ You can generate command in browser debuger (stop in function), for example:
 ```
 copy("NODE_PATH=./ exam --amd-loader --m=" + new Error().stack.split("\n")[1].split(location.host)[1].split(".js?")[0] + " --f=" + new Error().stack.split("\n")[1].split("(")[1].split(" ")[2] + " --a='" + JSON.stringify(arguments) + "'")
 ```
+You can generate command in node.js (stop in function), for example:
+```
+"NODE_PATH=./ exam --m=" + new Error().stack.split("\n")[1].split(global.process.env.NODE_PATH)[1].split(".js:")[0] + " --f=" + new Error().stack.split("\n")[1].split("(")[1].split(" ")[2] + " --a='" + JSON.stringify(arguments) + "'"
+```
 
 
 #methods
