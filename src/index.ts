@@ -8,7 +8,14 @@ export function exam(func: any, context: any) {
         ? context
         : context.children.find((m: any) => m.exports[func.name] === func);
     return function mutant(this: any) {
-        const ret = func.apply(this, arguments);
+        let ret: any;
+        let isThrow: boolean = false;
+        try {
+            ret = func.apply(this, arguments);
+        } catch (e) {
+            isThrow = true;
+            ret = e;
+        }
 
         const filename = module.filename.split(conf.get("mainCat"))[1] ?? module.filename;
 
@@ -16,6 +23,7 @@ export function exam(func: any, context: any) {
             [JSON.stringify(arguments)]: {
                 input: arguments,
                 output: ret,
+                throw: isThrow,
             },
             fileName: filename.replace(/^\/+|\/+$/g, ""),
             funcName: func.name,
