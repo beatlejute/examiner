@@ -42,12 +42,14 @@ export const inquirer = (tcase: any): void => {
         describe = mock[key].describe;
         it = mock[key].it;
     }
+    // @ts-ignore
     describes = [...new Set(Object.values(mock)
         .filter((p: any) => p.describe && p.describe !== describe)
         .map((p: any) => p.describe))];
     if (describe) {
         describes.unshift(describe);
     }
+    // @ts-ignore
     its = [...new Set(Object.values(mock)
         .filter((p: any) => p.it && p.it !== it)
         .map((p: any) => p.it))];
@@ -75,7 +77,7 @@ export const inquirer = (tcase: any): void => {
 
         switch (step) {
             case 0:
-                testCase[key].describe = describes[answer] ?? answer;
+                testCase[key].describe = describes[answer] || answer || testCase.fileName + "/" + testCase.funcName;
                 if (its.length) {
                     // tslint:disable-next-line:no-console
                     console.log("\x1b[32m", "Select number of test it or enter new:");
@@ -90,12 +92,12 @@ export const inquirer = (tcase: any): void => {
                 }
                 break;
             case 1:
-                testCase[key].it = its[answer] ?? answer;
+                testCase[key].it = its[answer] || answer || "Verification of results";
                 // tslint:disable-next-line:no-console
                 console.log("Enter test message:");
                 break;
             case 2:
-                testCase[key].message = answer;
+                testCase[key].message = answer || "No message";
                 // tslint:disable-next-line:no-console
                 console.log("Test generate complete.");
 
@@ -192,10 +194,10 @@ describe("${describe}", () => {`;
                         case "boolean":
                             if (mock[test].output) {
                                 code += `
-        assert.isTrue(${mock.funcName}.apply(this, JSON.stringify(Object.values(mockArr[${index}].input)), ${JSON.stringify(mock[test].message)});`;
+        assert.isTrue(${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)), ${JSON.stringify(mock[test].message)});`;
                             } else {
                                 code += `
-        assert.isFalse(${mock.funcName}.apply(this, JSON.stringify(Object.values(mockArr[${index}].input)), ${JSON.stringify(mock[test].message)});`;
+        assert.isFalse(${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)), ${JSON.stringify(mock[test].message)});`;
                             }
                             break;
                         default:

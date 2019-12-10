@@ -4,7 +4,7 @@
   "description": "Test generator for javaScript",
   "main": "./src/index.js",
   "scripts": {
-    "compile": "tsc -p --resolveJsonModule ./tsconfig.json",
+    "compile": "tsc -p ./tsconfig.json",
     "test": "NODE_PATH=./ TS_NODE_FILES=true TS_NODE_PROJECT=./test/tsconfig.json mocha --exit --require ts-node/register --require amd-loader --colors ./test/**/*.spec.ts",
     "lint": "tslint -c tslint.json 'src/**/*.ts' 'tests/**/*.spec.ts'",
     "doc": "typedoc --out docs/src/ --readme ./README.md",
@@ -32,7 +32,7 @@
     "@types/chai": "^4.2.2",
     "@types/minimist": "^1.2.0",
     "@types/mocha": "^5.2.7",
-    "@types/node": "^12.12.11",
+    "@types/node": "^12.12.14",
     "chai": "^4.2.0",
     "conventional-changelog-cli": "^2.0.28",
     "mocha": "^6.2.0",
