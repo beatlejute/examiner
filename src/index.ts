@@ -11,9 +11,11 @@ import {inquirer} from "../src/inquirer.js";
  * @returns mutant Function with listener for create test
  */
 export function exam(func: any, context: any) {
-    const module = context.exports[func.name] === func
+    const module = (
+        context.exports[func.name] === func
         ? context
-        : context.children.find((m: any) => m.exports[func.name] === func);
+        : context.children.find((m: any) => m.exports[func.name] === func)
+    ) ?? context;
     return function mutant(this: any) {
         let ret: any;
         let isThrow: boolean = false;

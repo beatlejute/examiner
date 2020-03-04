@@ -45,6 +45,7 @@
     "amd-loader": "git+https://github.com:beatlejute/node-amd-loader.git",
     "config-js": "^1.1.13",
     "minimist": "^1.2.0",
+    "rewire": "^4.0.1",
     "ts-node": "^8.5.4"
   }
 }

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import minimist from "minimist";
+import rewire from "rewire";
 const argv: any = minimist(process.argv.slice(2), {
     alias: {
         a: "arguments",
@@ -8,7 +9,7 @@ const argv: any = minimist(process.argv.slice(2), {
     },
 });
 
-import {exam} from "../src/index";
+import {exam} from "../src";
 
 if (argv["amd-loader"]) {
     // tslint:disable-next-line:no-var-requires
@@ -24,7 +25,7 @@ let traineeModuleFuncs: any = [];
 let step: number = 0;
 
 const getModuleStep = (module: string): void => {
-    traineeModuleObj = require(module);
+    traineeModuleObj = rewire(module);
     traineeModuleFuncs = Object.keys(traineeModuleObj);
     // tslint:disable-next-line:no-console
     console.log("Enter trainee function:");
@@ -46,14 +47,18 @@ const getFunctionStep = (func: string): void => {
     console.log("Enter input arguments object:");
 };
 const createTest = (): void => {
-    const trainee = exam(traineeModuleObj[traineeFunction], module);
+    const trainee = exam(
+        traineeModuleObj[traineeFunction] ?? traineeModuleObj.__get__(traineeFunction),
+        module.children[module.children.length - 1],
+    );
     // @ts-ignore
     trainee.apply(this, Object.values(JSON.parse(traineeArguments)));
 };
 
 if (argv.module) {
     traineeModule = argv.module;
-    traineeModuleObj = require(traineeModule);
+    // tslint:disable-next-line:no-var-requires
+    traineeModuleObj = rewire(traineeModule);
     step++;
 
     if (argv.function) {
