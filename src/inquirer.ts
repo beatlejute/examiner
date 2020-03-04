@@ -194,25 +194,40 @@ describe('${describe}', () => {`;
 
                 if (mock[test].throw) {
                     code += `
-        expect(() => ${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)), '${mock[test].message.toString()}').${mock[test].inaccuracy ? "to.not.throw()" : "to.throw()"};`;
+        expect(
+            () => ${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)),
+            '${mock[test].message.toString()}'
+        ).${mock[test].inaccuracy ? "to.not.throw()" : "to.throw()"};`;
                 } else {
                     switch (typeof mock[test].output) {
                         case "object":
                             code += `
-        assert.${mock[test].inaccuracy ? "notDeepEqual" : "deepEqual"}(${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)), mockArr[${index}].output, '${mock[test].message.toString()}');`;
+        assert.${mock[test].inaccuracy ? "notDeepEqual" : "deepEqual"}(
+            ${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)), mockArr[${index}].output,
+            '${mock[test].message.toString()}'
+        );`;
                             break;
                         case "boolean":
                             if (mock[test].output) {
                                 code += `
-        assert.${mock[test].inaccuracy ? "isFalse" : "isTrue"}(${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)), '${mock[test].message.toString()}'});`;
+        assert.${mock[test].inaccuracy ? "isFalse" : "isTrue"}(
+            ${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)),
+            '${mock[test].message.toString()}'}
+        );`;
                             } else {
                                 code += `
-        assert.${mock[test].inaccuracy ? "isTrue" : "isFalse"}(${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)), '${mock[test].message.toString()}');`;
+        assert.${mock[test].inaccuracy ? "isTrue" : "isFalse"}(
+            ${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)),
+            '${mock[test].message.toString()}'
+        );`;
                             }
                             break;
                         default:
                             code += `
-        assert.${mock[test].inaccuracy ? "notEqual" : "equal"}(${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)) ,mockArr[${index}].output, '${mock[test].message.toString()}'});`;
+        assert.${mock[test].inaccuracy ? "notEqual" : "equal"}(
+            ${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)) ,mockArr[${index}].output,
+            '${mock[test].message.toString()}'}
+        );`;
                             break;
                     }
                 }
