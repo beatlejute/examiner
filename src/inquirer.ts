@@ -112,7 +112,7 @@ export const inquirer = (tcase: any): void => {
 
                 const newMock = Object.assign(mock, testCase);
                 fs.mkdirSync(path.dirname(mockFilename), {recursive: true});
-                fs.writeFileSync(mockFilename, "export const mock = " + JSON.stringify(newMock), "utf8");
+                fs.writeFileSync(mockFilename, "export const mock = " + JSON.stringify(newMock, null, 4), "utf8");
                 fs.mkdirSync(path.dirname(testFilename), {recursive: true});
                 fs.writeFileSync(testFilename, generator(newMock, conf), "utf8");
                 process.exit();
@@ -171,6 +171,7 @@ export function generator(mock: any, conf: any) {
 
     let code = `
 import {assert, expect} from 'chai';
+// @ts-ignore
 import {mock} from '${mockFile.replace(/.ts+$/g, "")}';
 const mockArr: any = Object.values(mock);
 // tslint:disable-next-line:no-var-requires
@@ -193,25 +194,25 @@ describe('${describe}', () => {`;
 
                 if (mock[test].throw) {
                     code += `
-        expect(() => ${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)), ${JSON.stringify(mock[test].message)}).${mock[test].inaccuracy ? "to.not.throw()" : "to.throw()"};`;
+        expect(() => ${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)), '${mock[test].message.toString()}').${mock[test].inaccuracy ? "to.not.throw()" : "to.throw()"};`;
                 } else {
                     switch (typeof mock[test].output) {
                         case "object":
                             code += `
-        assert.${mock[test].inaccuracy ? "notDeepEqual" : "deepEqual"}(${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)), mockArr[${index}].output, ${JSON.stringify(mock[test].message)});`;
+        assert.${mock[test].inaccuracy ? "notDeepEqual" : "deepEqual"}(${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)), mockArr[${index}].output, '${mock[test].message.toString()}');`;
                             break;
                         case "boolean":
                             if (mock[test].output) {
                                 code += `
-        assert.${mock[test].inaccuracy ? "isFalse" : "isTrue"}(${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)), ${JSON.stringify(mock[test].message)});`;
+        assert.${mock[test].inaccuracy ? "isFalse" : "isTrue"}(${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)), '${mock[test].message.toString()}'});`;
                             } else {
                                 code += `
-        assert.${mock[test].inaccuracy ? "isTrue" : "isFalse"}(${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)), ${JSON.stringify(mock[test].message)});`;
+        assert.${mock[test].inaccuracy ? "isTrue" : "isFalse"}(${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)), '${mock[test].message.toString()}');`;
                             }
                             break;
                         default:
                             code += `
-        assert.${mock[test].inaccuracy ? "notEqual" : "equal"}(${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)) ,mockArr[${index}].output, ${JSON.stringify(mock[test].message)});`;
+        assert.${mock[test].inaccuracy ? "notEqual" : "equal"}(${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)) ,mockArr[${index}].output, '${mock[test].message.toString()}'});`;
                             break;
                     }
                 }
