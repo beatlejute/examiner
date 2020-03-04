@@ -225,8 +225,9 @@ describe('${describe}', () => {`;
                         default:
                             code += `
         assert.${mock[test].inaccuracy ? "notEqual" : "equal"}(
-            ${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)) ,mockArr[${index}].output,
-            '${mock[test].message.toString()}'}
+            ${mock.funcName}.apply(this, Object.values(mockArr[${index}].input)),
+            mockArr[${index}].output,
+            '${mock[test].message.toString()}'
         );`;
                             break;
                     }
