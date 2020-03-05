@@ -172,10 +172,12 @@ export function generator(mock: any, conf: any) {
     let code = `
 import {assert, expect} from 'chai';
 // @ts-ignore
+import rewire from 'rewire';
+// @ts-ignore
 import {mock} from '${mockFile.replace(/.ts+$/g, "")}';
 const mockArr: any = Object.values(mock);
 // tslint:disable-next-line:no-var-requires
-const ${mock.funcName} = require('rewire')('${mock.fileName.replace(/.js+$/g, "")}').__get__('${mock.funcName}');
+const ${mock.funcName} = rewire('${mock.fileName.replace(/.js+$/g, "")}').__get__('${mock.funcName}');
 `;
 
     // tslint:disable-next-line:forin no-shadowed-variable
