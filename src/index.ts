@@ -1,7 +1,7 @@
 // @ts-ignore
 import config from "config-js";
 const conf: any = new config("examconfig.js");
-import {inquirer} from "../src/inquirer.js";
+import {inquirer} from "../src/inquirer";
 
 /**
  * Mutator for listen function inputs and outputs.
